@@ -1,4 +1,7 @@
+// Load modules
 const mongoose = require('mongoose');
+
+// Define the schema
 const BookSchema = new mongoose.Schema({
     bookName: {
         type: String,
