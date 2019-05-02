@@ -24,6 +24,8 @@ app.set('port', process.env.PORT || 3000);
 // Parse incoming json requests
 app.use(jsonParser());
 
+app.get('/', (req, res) => res.send("<h1>Hello, World!</h1>"))
+
 // Send 404 if no other route matched
 app.use((req, res) => {
     res.status(404).json({
