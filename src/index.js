@@ -2,9 +2,13 @@
 const express = require('express');
 const jsonParser = require('body-parser').json;
 const mongoose = require('mongoose');
+const routes = require('./routes');
 
 // Set up the app
 const app = express();
+
+// Set the view engine
+app.set('view engine', 'pug');
 
 // Set up a MongoDB connection
 mongoose.connect("mongodb://localhost:27017/summarian", {useNewUrlParser: true});
@@ -17,14 +21,13 @@ db.on('connected', console.log.bind(console, `Successfully connected to the ${db
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
-
 // Set the port
 app.set('port', process.env.PORT || 3000);
 
 // Parse incoming json requests
 app.use(jsonParser());
 
-app.get('/', (req, res) => res.send("<h1>Hello, World!</h1>"))
+app.use('/', routes);
 
 // Send 404 if no other route matched
 app.use((req, res) => {
