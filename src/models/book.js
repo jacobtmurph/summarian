@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // Define the schema
 const BookSchema = new mongoose.Schema({
-    bookName: {
+    title: {
         type: String,
         required: true,
         unique: true
@@ -15,11 +15,7 @@ const BookSchema = new mongoose.Schema({
     publicationInfo: {
         publisher: {
             type: String,
-            required: true
         },
-        publishedOn: {
-            type: Date,
-        }
     },
     summaries: [{
         type: mongoose.Schema.Types.ObjectId,
