@@ -1,20 +1,77 @@
+// Module imports.
 const express = require('express');
 const Book = require('../models/book');
 const Summary = require('../models/summary');
+const User = require('../models/user');
+const checkLoggedIn = require('../middleware/checkLoggedIn');
 
+// Create the router.
 const router = express.Router();
 
-// Redirect ot the book list route
+// Redirect ot the book list route.
 router.get('/', (req, res) => res.redirect('/api/books'));
 
+// Get the currently logged in user & return non-sensitive information.
+router.get('/users', checkLoggedIn, (req, res, next) => {
+    User.findById(res.locals.user._id, {_id: false, password: false}, (err, user) => {
+        if(err) return next(err);
+        res.json(user);
+    });
+});
+
+// Update the logged in user's information.
+router.put('/users', checkLoggedIn, (req, res, next) => {
+    User.findByIdAndUpdate(res.locals.user._id, req.body, (err, results) => {
+        if (err) {
+            err.status = 400;
+            return next(err);
+        } else {
+            res.status(204);
+            return res.end();
+        }
+    });
+})
+
 // Create a new user & add them to the database.
-router.post('/user', (req, res, next) => {
+router.post('/users', (req, res, next) => {
+    // If all the required fields are provided.
     if (req.body.username &&
         req.body.emailAddress &&
         req.body.password) {
-            
+            // Add the required information to a data object.
+            const userData = {
+                username: req.body.username,
+                emailAddress: req.body.emailAddress,
+                password: req.body.password,
+            };
+
+            // If optional fields are provided.
+            if (req.body.profileName) {
+                // Add them to the data object.
+                userData.profileName = {
+                    firstName: req.body.profileName.firstName,
+                    lastName: req.body.profileName.lastName,
+                };
+            }
+
+            // Add the user to the database & end the response.
+            User.create(userData, (error, user) => {
+                if (error) {
+                    error.status = 400;
+                    return next(error);
+                } else {
+                    res.location('/');
+                    res.status(201);
+                    return res.end();
+                }
+            })
+        // If required fields are missing, return an error.
+        } else {
+            const err = new Error("Username, email, & password fields are required");
+            err.status = 400;
+            return next(err)
         }
-})
+});
 
 // Get a list of all books in the databse.
 router.get('/books', (req, res, next) => {
@@ -26,7 +83,7 @@ router.get('/books', (req, res, next) => {
 });
 
 // Create a new book & add it to the database.
-router.post('/books', (req, res, next) => {
+router.post('/books', checkLoggedIn, (req, res, next) => {
     // If a title for the book & author are provided.
     if (req.body.title && req.body.author) {
         // Set the appropriate, required data from the request for the Book Schema.
@@ -55,6 +112,10 @@ router.post('/books', (req, res, next) => {
                 return res.end();
             }
         })
+    } else {
+        const err = new Error("Book title & author fields are required");
+        err.status = 400;
+        return next(err)
     }
 });
 
