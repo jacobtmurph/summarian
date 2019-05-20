@@ -25,7 +25,7 @@ const SummarySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    responses: [{ body: { type: String, required: true },
+    responses: [{ body: String,
                   posted: { type: Date, default: Date.now },
                   responsedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User'} 
                 }]

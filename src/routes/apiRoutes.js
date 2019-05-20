@@ -75,7 +75,7 @@ router.post('/users', (req, res, next) => {
 
 // Get a list of all books in the databse.
 router.get('/books', (req, res, next) => {
-    return Book.find({}, {_id: false, title: true, author: true}, 
+    return Book.find({}, {title: true, author: true}, 
                     (err, results) => {
                         if(err) return next(err);
                         res.json(results);
@@ -111,7 +111,8 @@ router.post('/books', checkLoggedIn, (req, res, next) => {
                 res.status(201);
                 return res.end();
             }
-        })
+        });
+    // If title & author fields are missing, return an error.
     } else {
         const err = new Error("Book title & author fields are required");
         err.status = 400;
@@ -129,5 +130,49 @@ router.get('/books/:bookId', (req, res, next) => {
                             res.json(book);
                         });
 });
+
+// Get all the summaries for a specific book.
+router.get('/books/:bookId/summaries', (req, res, next) => {
+    return Book.findById(req.params.bookId)
+                        .populate({path: 'summaries', populate: [{path: 'postedBy', select: ['profileName', 'username']}]})
+                        .exec((err, book) => {
+                            if(err) return next(err);
+                            res.json(book.summaries);
+                        });
+});
+
+// Create a new summary for a book.
+router.post('/books/:bookId/summaries', checkLoggedIn, (req, res, next) => {
+    // if a rating and summary content are provided.
+    if (req.body.bookRating && req.body.summaryContent) {
+        // Add them to the data model, along with the current user's _id.
+        const summaryData = {
+            postedBy: res.locals.user._id,
+            bookRating: req.body.bookRating,
+            summaryContent: req.body.summaryContent
+        };
+
+        // Create the summary & add it to the database.
+        Summary.create(summaryData, (error, summary) => {
+            if (error) {
+                error.status = 400;
+                return next(error);
+            } else {
+                // Then add it to the related book model.
+                return Book.findByIdAndUpdate(req.params.bookId, {$push: {summaries: summary._id}}, (err, results) => {
+                    if (err) {
+                        err.status = 400;
+                        return next(err);
+                    } else {
+                        // Set the response location & status, then end the response.
+                        res.location(`/books/${req.params.bookId}`);
+                        res.status(201);
+                        return res.end();
+                    }
+                });
+            }
+        });
+    }
+})
 
 module.exports = router;
