@@ -173,6 +173,19 @@ router.post('/books/:bookId/summaries', checkLoggedIn, (req, res, next) => {
             }
         });
     }
-})
+});
+
+// Update an existing summary when provided with an Id.
+router.put('/books/:bookId/summaries/summaryId', checkLoggedIn, (req, res, next) => {
+    Summary.findByIdAndUpdate(summaryId, req.body, (err, results) => {
+        if (err) {
+            err.status = 400;
+            return next(err);
+        } else {
+            res.status(204);
+            return res.end();
+        }
+    });
+});
 
 module.exports = router;
