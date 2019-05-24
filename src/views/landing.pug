@@ -1,0 +1,17 @@
+html
+    head
+        title Summarian | Review Before You Read
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        
+        //- Bootstrap CSS
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
+        link(rel="stylesheet", href="/src/assets/css/custom.css")
+    body.bg-light
+        .jumbotron.text-center.bg-info.text-light.mb-1
+            h2.mx-5.py-2.bg-light.text-info.rounded-pill.shadow Review before you read
+            p.mt-4.lead Summarian let's <i><b>you</b></i> get the gist of books in any genre.
+        nav.my-0.bg-light.shadow.nav.nav-pills.nav-justified
+            a(href="#").nav-item.nav-link.ml-2 Book List
+            a(href="#").nav-item.nav-link Sign Up
+            a(href="#").nav-item.nav-link.active.mr-2 About Us
+        include partials/footer.pug

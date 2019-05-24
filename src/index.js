@@ -7,6 +7,9 @@ const routes = require('./routes');
 // Set up the app
 const app = express();
 
+// Set custom views dir
+app.set('views', './src/views');
+
 // Set the view engine
 app.set('view engine', 'pug');
 

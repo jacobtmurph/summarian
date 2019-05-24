@@ -5,7 +5,7 @@ const apiRoutes = require('./apiRoutes');
 // Create a handler for the routes.
 const router = express.Router();
 
-router.get('/', (req, res) => res.send("Hello, Summarian"));
+router.get('/', (req, res) => res.render('landing'));
 
 // Hook in the internal api.
 router.use('/api/', apiRoutes);
