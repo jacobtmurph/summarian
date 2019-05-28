@@ -1,0 +1,23 @@
+body {
+    overflow-x: hidden;
+  }
+
+.img-fluid {
+    width: 100vw;
+    padding: none;
+}
+
+@media screen and (min-width: 1000px) {
+    .mx-md-23 {
+        margin-left: 23rem;
+        margin-right: 23rem;
+    }
+    
+    .img-fluid {
+        width: 50vw;
+    }
+
+    .m-md-box {
+        margin: .5rem 17rem;
+    }
+}

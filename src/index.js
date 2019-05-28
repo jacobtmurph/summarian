@@ -13,6 +13,9 @@ app.set('views', './src/views');
 // Set the view engine
 app.set('view engine', 'pug');
 
+// Set the static route
+app.use('/static', express.static('./src/assets'))
+
 // Set up a MongoDB connection
 mongoose.connect("mongodb://localhost:27017/summarian", {useNewUrlParser: true});
 const db = mongoose.connection;
