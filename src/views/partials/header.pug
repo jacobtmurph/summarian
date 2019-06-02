@@ -1,0 +1,16 @@
+nav.navbar.navbar-expand-md.navbar-dark.bg-info
+    a(href="/booklist").navbar-brand Summarian
+    button(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation").navbar-toggler
+        span.navbar-toggler-icon.text-center.text-muted
+    .collapse.navbar-collapse#navbarSupportedContent
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                unless loggedIn
+                    a(href="/signup").nav-link Sign Up
+                else
+                    a(href="/profile").nav-link Profile
+            li.nav-item
+                a(href="/boards").nav-link Genre Boards
+        form.form-inline.my-2.my-md-0
+            input(type="search" placeholder="Search" aria-label="Search").form-control.mr-sm-2
+            button(type="submit").btn.btn-outline-light.my-2.my-sm-0 Find book

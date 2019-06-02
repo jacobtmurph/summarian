@@ -2,8 +2,8 @@ body {
     overflow-x: hidden;
   }
 
-  .bg-faded {
-      background-color:rgb(238, 238, 238);
+  .bg-info-light {
+      background-color: #e3f2fd;
   }
 
 .img-fluid {
