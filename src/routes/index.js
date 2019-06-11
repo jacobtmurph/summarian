@@ -1,13 +1,30 @@
 // Load imports.
+const apiRoutes = require('./api');
 const express = require('express');
-const apiRoutes = require('./apiRoutes');
+const loginRoutes = require('./login');
+const signupRoutes= require('./signup')
+const User = require('../models/user');
+
+
 
 // Create a handler for the routes.
 const router = express.Router();
 
 router.get('/', (req, res) => res.render('landing'));
 
-router.get('/layout', (req, res) => res.render('layout', {title: "layout"}));
+
+// App routes
+router.use('/signup', signupRoutes);
+
+
+router.use('/login', loginRoutes);
+
+router.get('/profile/:userId', (req, res, next) => {
+    return User.findById(req.params.userId, (err, user) => {
+        if(err) return next(err);
+        res.render('profile', {user: user});
+    });
+});
 
 // Hook in the internal api.
 router.use('/api/', apiRoutes);

@@ -43,16 +43,11 @@ router.post('/users', (req, res, next) => {
                 username: req.body.username,
                 emailAddress: req.body.emailAddress,
                 password: req.body.password,
+                profileName: {
+                    firstName: req.body.firstName ? req.body.firstName : undefined,
+                    lastName: req.body.lastName ? req.body.lastName : undefined,
+                },
             };
-
-            // If optional fields are provided.
-            if (req.body.profileName) {
-                // Add them to the data object.
-                userData.profileName = {
-                    firstName: req.body.profileName.firstName,
-                    lastName: req.body.profileName.lastName,
-                };
-            }
 
             // Add the user to the database & end the response.
             User.create(userData, (error, user) => {
@@ -62,7 +57,7 @@ router.post('/users', (req, res, next) => {
                 } else {
                     res.location('/');
                     res.status(201);
-                    return res.end();
+                    return res.end('/');
                 }
             })
         // If required fields are missing, return an error.

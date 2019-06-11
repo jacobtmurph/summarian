@@ -1,11 +1,26 @@
 // Load modules
 const express = require('express');
 const jsonParser = require('body-parser').json;
+const formParser = require('body-parser').urlencoded;
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const session = require('express-session');
 
 // Set up the app
 const app = express();
+
+// Set up session details
+app.use(session({
+   secret:'Books are brilliant',
+   resave: true,
+   saveUninitialized: false
+}));
+
+// Set the current user for templates
+app.use((req, res, next) => {
+   res.locals.currentUser = req.session.userId;
+   next();
+});
 
 // Set custom views dir
 app.set('views', './src/views');
@@ -30,7 +45,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // Set the port
 app.set('port', process.env.PORT || 3000);
 
-// Parse incoming json requests
+// Parse incoming json & formdata requests
+app.use(formParser({extended: true}));
 app.use(jsonParser());
 
 app.use('/', routes);

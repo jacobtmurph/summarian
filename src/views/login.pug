@@ -1,0 +1,20 @@
+extends layout.pug
+
+block content
+
+    if(error)
+        .error-message.ml-md-2
+            h2.error Uh oh!
+            p.lead.text-danger #{error.message}        
+
+    form(action='/login', method="post")
+         p
+            label(for="emailAddress") Email Address
+            input(name="emailAddress", type="text", id="emailAddress")
+         p
+            label(for="password") Password
+            input(name="password", type="password", id="password")
+         p
+            input(type="submit" value="Login")
+         p
+            a(class="button", href="/") Cancel

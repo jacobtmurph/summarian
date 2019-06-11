@@ -5,10 +5,10 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-info
     .collapse.navbar-collapse#navbarSupportedContent
         ul.navbar-nav.mr-auto
             li.nav-item
-                unless loggedIn
+                unless currentUser
                     a(href="/signup").nav-link Sign Up
                 else
-                    a(href="/profile").nav-link Profile
+                    a(href=`/profile/${currentUser}`).nav-link Profile
             li.nav-item
                 a(href="/boards").nav-link Genre Boards
         form.form-inline.my-2.my-md-0

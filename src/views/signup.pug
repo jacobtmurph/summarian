@@ -1,0 +1,35 @@
+extends layout.pug
+
+block content
+
+    if(error)
+        .error-message.ml-md-2
+            h2.error Uh oh!
+            if message
+                p.lead.text-danger #{message}
+            else
+                p.lead.text-danger All fields with a * are required.        
+
+    form(action='/signup', method="post")
+        p
+            label(for="username") Username*
+            input(name="username", type="text", id="username")
+        p
+            label(for="emailAddress") Email Address*
+            input(name="emailAddress", type="text", id="emailAddress")
+        p
+            label(for="firstName") First Name
+            input(name="firstName", type="text", id="firstName")
+        p
+            label(for="lastName") Last Name
+            input(name="lastName", type="text", id="lastName")   
+        p
+            label(for="password") Password*
+            input(name="password", type="password", id="password")
+        p
+            label(for="confirmPassword") Confirm Password*
+            input(name="confirmPassword", type="password", id="confirmPassword")
+        p
+            input(type="submit" value="Create Account")
+        p
+            a(class="button", href="/") Cancel
