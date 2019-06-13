@@ -9,8 +9,8 @@ signupRouter.get('/', (req, res) => res.render('signup', {title: "Create an Acco
 signupRouter.post('/', (req, res, next) => {
     if (req.body.password != req.body.confirmPassword) {
         const err = new Error("Password fields do not match");
-            err.status = 400;
-            return res.render('signup', {title: 'Error Creating Account', error: true, message: err.message});
+        err.status = 400;
+        return res.render('signup', {title: 'Error Creating Account', error: true, message: err.message});
     } else {
         const userData = {
             username: req.body.username,

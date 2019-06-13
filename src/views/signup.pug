@@ -9,7 +9,8 @@ block content
                 p.lead.text-danger #{message}
             else
                 p.lead.text-danger All fields with a * are required.        
-
+    a(href='/login') 
+        button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Login instead.
     form(action='/signup', method="post")
         p
             label(for="username") Username*
@@ -32,4 +33,5 @@ block content
         p
             input(type="submit" value="Create Account")
         p
-            a(class="button", href="/") Cancel
+            a(href="/") 
+                button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel

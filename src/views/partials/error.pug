@@ -1,0 +1,5 @@
+if(error)
+        .error-message.ml-md-2
+            h2.error Uh oh!
+            if error.message
+                p.lead.text-danger #{error.message}

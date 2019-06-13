@@ -1,5 +1,21 @@
 body {
     overflow-x: hidden;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+
+#content-wrapper {
+    padding-bottom: 3.5rem;
+}
+
+footer {
+    position: absolute;
+    margin-top: 4rem;
+    bottom: 0;
+    width: 100%;
   }
 
   .bg-info-light {

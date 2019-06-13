@@ -1,0 +1,23 @@
+.modal(tabindex='-1', role='dialog' id="summaryModal")
+  .modal-dialog-centered(role='document')
+    .modal-content
+      .modal-header
+        h5.modal-title New Summary
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(action=`/booklist/${book._id}/summaries/`, method="post")
+          p
+            label(for="bookRating") Book Rating
+            select(class="form-control", name="bookRating", id="bookRating")
+              option(value="0") 0 - Very bad
+              option(value="1") 1 - Bad
+              option(value="2") 2 - Okay
+              option(value="3") 3 - Decent
+              option(value="4") 4 - Good
+              option(value="5") 5 - Great
+          p
+            p Summary content:
+            textarea(name="summaryContent", id="summaryContent", cols="20", rows="5")
+          button.btn.btn-primary(type='submit') Submit Summary
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Close

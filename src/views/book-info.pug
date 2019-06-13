@@ -1,0 +1,25 @@
+extends layout.pug
+
+block content 
+
+    h1= book.title
+    h3= book.author
+
+    include partials/error.pug
+
+    if(currentUser) 
+        button(type="button", data-toggle="modal", data-target="#summaryModal").btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Post a new summary
+
+    hr 
+    .summaries
+        ul
+            if(book.summaries)
+                each summary in book.summaries
+                    li
+                        h5= summary.postedBy.username
+                        span= summary.approval
+                        p.text-muted= summary.postedOn
+
+                        p= summary.summaryContent
+
+    include partials/modal.pug

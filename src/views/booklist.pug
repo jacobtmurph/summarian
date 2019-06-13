@@ -1,0 +1,10 @@
+extends layout.pug
+
+block content
+    each book in books
+        .book-card
+            a(href=`/booklist/${book._id}`)
+                h2= book.title
+            p.lead= book.author
+            if(book.summaries != undefined)
+                p.text-muted Summaries: #{book.summaries.length}

@@ -1,5 +1,6 @@
 // Load imports.
 const apiRoutes = require('./api');
+const bookRoutes = require('./books')
 const express = require('express');
 const loginRoutes = require('./login');
 const signupRoutes= require('./signup')
@@ -18,6 +19,8 @@ router.use('/signup', signupRoutes);
 
 
 router.use('/login', loginRoutes);
+
+router.use('/booklist', bookRoutes);
 
 router.get('/profile/:userId', (req, res, next) => {
     return User.findById(req.params.userId, (err, user) => {

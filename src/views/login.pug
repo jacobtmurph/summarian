@@ -2,10 +2,7 @@ extends layout.pug
 
 block content
 
-    if(error)
-        .error-message.ml-md-2
-            h2.error Uh oh!
-            p.lead.text-danger #{error.message}        
+    include partials/error.pug       
 
     form(action='/login', method="post")
          p
@@ -15,6 +12,7 @@ block content
             label(for="password") Password
             input(name="password", type="password", id="password")
          p
-            input(type="submit" value="Login")
+            input(type="submit" value="Login")         
          p
-            a(class="button", href="/") Cancel
+            a(href="/") 
+               button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel
