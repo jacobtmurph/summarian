@@ -7,7 +7,7 @@ const ValidationError = require('mongoose').Error.ValidationError
 const bookRouter = express.Router();
 
 bookRouter.get('/', (req, res, next) => {
-    return Book.find({}, {title: true, author: true}, 
+    return Book.find({}, {title: true, author: true, summaries: true}, 
         (err, results) => {
             if(err) return next(err);
             res.render('booklist', {title: 'Book List', books: results})

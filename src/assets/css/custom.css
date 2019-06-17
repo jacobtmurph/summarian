@@ -8,12 +8,12 @@ body {
   }
 
 #content-wrapper {
-    padding-bottom: 3.5rem;
+    padding-bottom: 8rem;
 }
 
 footer {
     position: absolute;
-    margin-top: 4rem;
+    margin-top: 4.5rem;
     bottom: 0;
     width: 100%;
   }
@@ -28,6 +28,10 @@ footer {
 }
 
 @media screen and (min-width: 1000px) {
+    #content-wrapper {
+        padding-bottom: 5.5rem;
+    }
+
     .mx-md-23 {
         margin-left: 23rem;
         margin-right: 23rem;

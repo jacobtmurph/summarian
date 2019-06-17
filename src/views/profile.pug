@@ -5,5 +5,6 @@ block content
     if(user.profileName.firstName == undefined)
         h1.username #{user.username}
     else
-        h1.profile-name #{user.profileName.firstName} #{lastName ? req.body.lastName : ''}
-    
+        h1.profile-name #{user.profileName.firstName} #{user.profileName.lastName ? user.profileName.lastName: ''}
+
+        h3.text-muted= user.username  
