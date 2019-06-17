@@ -1,30 +1,36 @@
 extends layout.pug
 
 block content 
-
-    h1.text-center.text-md-left= book.title
-    h3.text-center= book.author
+    .ml-md-2.mt-4
+        h1.text-center.text-md-left= book.title
+        h3.text-center.text-md-left= book.author
 
     include partials/error.pug
 
     if(currentUser) 
-        .row.justify-content-center.mt-4
+        .text-center.text-md-left.mt-4.ml-md-2
             button(type="button", data-toggle="modal", data-target="#summaryModal").btn.btn-info.btn-md.text-light.text-decoration-none.shadow-lg Post a new summary
 
     hr 
+    
     a(data-toggle="collapse", href="#summaries", aria-expanded="false", aria-controls="summaries").btn.btn-sm.btn-info.text-decoration-none.text-light Toggle Summaries
+
     #summaries.collapse
-            h2.text-info Summaries
+            h2.text-info.mt-3 Summaries
             ul.ml-4.list-unstyled
                 if(book.summaries.length > 0)
                     each summary in book.summaries
-                        li.text-center
-                            h5= summary.postedBy.username
+                        li.text-center.text-md-left
+                            unless summary.postedBy.profileName.firstName
+                                h5= summary.postedBy.username
+                            else 
+                                h5= summary.postedBy.profileName.firstName
                             span= summary.bookRating
                             p.text-muted= summary.postedOn.toDateString()
 
-                            p.lead= summary.summaryContent
-                            h5.text-center ---
+                            h5 Summary:
+                            p.lead.text-center.text-md-left.ml-md-2= summary.summaryContent
+                            hr.mx-5
                 else
                     li
                         h3.text-muted No summaries are currently written for this book

@@ -11,8 +11,15 @@ const User = require('../models/user');
 // Create a handler for the routes.
 const router = express.Router();
 
-router.get('/', (req, res) => res.render('landing'));
+router.get('/', (req, res) => {
+    if (res.locals.currentUser) {
+        res.redirect('/booklist');
+    } else {
+        res.redirect('/landing');
+    }    
+});
 
+router.get('/landing', (req, res) => res.render('landing'));
 
 // App routes
 router.use('/signup', signupRoutes);

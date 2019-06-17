@@ -12,11 +12,7 @@ const BookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    publicationInfo: {
-        publisher: {
-            type: String,
-        },
-    },
+    OpenLibraryId: String,
     summaries: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Summary'

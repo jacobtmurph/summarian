@@ -1,0 +1,17 @@
+.card
+    .card-header
+        .text-info Add a new book
+        
+    form(action="/booklist", method="post")
+        .form-group#book-form
+            p 
+                label(for="title") Book Title
+                input(name="title", type="text", id="title").form-control
+            p 
+                label(for="author") Author
+                input(name="author", type="text", id="author").form-control
+            p 
+                label(for="OpenLibraryId") OpenLibrary ID (Optional)
+                input(name="OpenLibraryId", type="text", id="OpenLibraryId").form-control
+            p.text-center
+                input(type="submit", value="Add Book").btn.btn-info

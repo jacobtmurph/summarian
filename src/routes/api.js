@@ -86,15 +86,7 @@ router.post('/books', checkLoggedIn, (req, res, next) => {
             title: req.body.title,
             author: req.body.author,
         };
-
-        // If optional data is provided.
-        if (req.body.publicationInfo) {
-            // Add it to the data object.
-            bookData.publicationInfo = {
-                publisher: req.body.publicationInfo.publisher
-            }
-        };
-
+        
         // Create the new book from the bookData object, and add it to the database.
         Book.create(bookData, (error, book) => {
             if (error) {
