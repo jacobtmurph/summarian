@@ -2,17 +2,18 @@ extends layout.pug
 
 block content
 
-    include partials/error.pug       
+    include partials/error.pug
 
-    form(action='/login', method="post")
-         p
-            label(for="emailAddress") Email Address
-            input(name="emailAddress", type="text", id="emailAddress")
-         p
-            label(for="password") Password
-            input(name="password", type="password", id="password")
-         p
-            input(type="submit" value="Login")         
-         p
-            a(href="/") 
-               button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel
+    .mx-4.mt-4.mt-md-5.text-center
+      form(action='/login', method="post").form-group
+            p.mx-md-5.px-md-5
+               label(for="emailAddress") Email Address
+               input(name="emailAddress", type="text", id="emailAddress").form-control
+            p.mx-md-5.px-md-5
+               label(for="password") Password
+               input(name="password", type="password", id="password").form-control
+            p.text-center
+               input(type="submit" value="Login")         
+            p.text-center
+               a(href="/") 
+                  button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel

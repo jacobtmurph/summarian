@@ -8,6 +8,8 @@ block content
             each book in books
                 .book-card.text-center.text-md-left
                     a(href=`/booklist/${book._id}`)
+                        if (book.OpenLibraryId)
+                            img(src=`http://covers.openlibrary.org/b/olid/${book.OpenLibraryId}-M.jpg`, alt=`${book.title} cover art`).img-thumbnail.align-self-center
                         h2= book.title
                     p.lead= book.author
                     if(book.summaries.length > 0)

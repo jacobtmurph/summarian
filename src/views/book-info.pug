@@ -1,11 +1,15 @@
 extends layout.pug
 
 block content 
-    .ml-md-2.mt-4
-        h1.text-center.text-md-left= book.title
-        h3.text-center.text-md-left= book.author
-
     include partials/error.pug
+
+    .d-md-flex.mt-4.align-items-center
+        if (book.OpenLibraryId)
+            img(src=`http://covers.openlibrary.org/b/olid/${book.OpenLibraryId}-M.jpg`, alt=`${book.title} cover art`).img-thumbnail.d-block.mx-auto.mx-md-2
+        .ml-md-2
+            h1.text-center.text-md-left= book.title
+            h3.text-center.text-md-left= book.author
+    a(href="https://openlibrary.org/").text-muted.text-decoration-none.ml-5.ml-md-1 Book covers provided by the Open Library
 
     if(currentUser) 
         .text-center.text-md-left.mt-4.ml-md-2
@@ -13,11 +17,11 @@ block content
 
     hr 
     
-    a(data-toggle="collapse", href="#summaries", aria-expanded="false", aria-controls="summaries").btn.btn-sm.btn-info.text-decoration-none.text-light Toggle Summaries
+    a(data-toggle="collapse", href="#summaries", aria-expanded="false", aria-controls="summaries").btn.btn-sm.btn-info.text-center.text-decoration-none.text-light Toggle Summaries
 
     #summaries.collapse
-            h2.text-info.mt-3 Summaries
-            ul.ml-4.list-unstyled
+            h2.text-center.text-md-left.text-info.mt-3 Summaries
+            ul.ml-md-4.list-unstyled
                 if(book.summaries.length > 0)
                     each summary in book.summaries
                         li.text-center.text-md-left
@@ -33,6 +37,6 @@ block content
                             hr.mx-5
                 else
                     li
-                        h3.text-muted No summaries are currently written for this book
+                        h3.text-muted.text-center.text-md-left No summaries are currently written for this book
 
     include partials/modal.pug

@@ -8,30 +8,32 @@ block content
             if message
                 p.lead.text-danger #{message}
             else
-                p.lead.text-danger All fields with a * are required.        
-    a(href='/login') 
-        button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Login instead.
-    form(action='/signup', method="post")
-        p
-            label(for="username") Username*
-            input(name="username", type="text", id="username")
-        p
-            label(for="emailAddress") Email Address*
-            input(name="emailAddress", type="text", id="emailAddress")
-        p
-            label(for="firstName") First Name
-            input(name="firstName", type="text", id="firstName")
-        p
-            label(for="lastName") Last Name
-            input(name="lastName", type="text", id="lastName")   
-        p
-            label(for="password") Password*
-            input(name="password", type="password", id="password")
-        p
-            label(for="confirmPassword") Confirm Password*
-            input(name="confirmPassword", type="password", id="confirmPassword")
-        p
-            input(type="submit" value="Create Account")
-        p
-            a(href="/") 
-                button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel
+                p.lead.text-danger All fields with a * are required.
+    .text-center
+        a(href='/login').mt-4.btn.btn-info.text-light.text-decoration-none.shadow-lg Login instead.
+    
+    .mx-4.mt-4.mt-md-5.text-center
+        form(action='/signup', method="post").form-group
+            p.mx-md-5.px-md-5
+                label(for="username") Username*
+                input(name="username", type="text", id="username").form-control
+            p.mx-md-5.px-md-5
+                label(for="emailAddress") Email Address*
+                input(name="emailAddress", type="text", id="emailAddress").form-control
+            p.mx-md-5.px-md-5
+                label(for="firstName") First Name
+                input(name="firstName", type="text", id="firstName").form-control
+            p.mx-md-5.px-md-5
+                label(for="lastName") Last Name
+                input(name="lastName", type="text", id="lastName").form-control 
+            p.mx-md-5.px-md-5
+                label(for="password") Password*
+                input(name="password", type="password", id="password").form-control
+            p.mx-md-5.px-md-5
+                label(for="confirmPassword") Confirm Password*
+                input(name="confirmPassword", type="password", id="confirmPassword").form-control
+            p.text-center
+                input(type="submit" value="Create Account")
+            p.text-center
+                a(href="/") 
+                    button.btn.btn-info.btn-sm.text-light.text-decoration-none.shadow-lg Cancel
