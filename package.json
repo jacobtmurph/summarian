@@ -4,7 +4,7 @@
   "description": "A simple, web-based book review catalogue written in Express & Mongo",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js localhost 3000",
+    "start": "node ./src/index.js localhost 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
