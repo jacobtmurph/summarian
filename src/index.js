@@ -5,22 +5,10 @@ const formParser = require('body-parser').urlencoded;
 const mongoose = require('mongoose');
 const routes = require('./routes');
 const session = require('express-session');
+const sessionStoreMongo = require('connect-mongo')(session);
 
 // Set up the app
 const app = express();
-
-// Set up session details
-app.use(session({
-   secret:'Books are brilliant',
-   resave: true,
-   saveUninitialized: false
-}));
-
-// Set the current user for templates
-app.use((req, res, next) => {
-   res.locals.currentUser = req.session.userId;
-   next();
-});
 
 // Set custom views dir
 app.set('views', './src/views');
@@ -41,6 +29,21 @@ db.on('connected', console.log.bind(console, `Successfully connected to the ${db
 // In the case of a Mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
 
+// Set up session details
+app.use(session({
+  secret:'Books are brilliant',
+  resave: true,
+  saveUninitialized: false,
+  store: new sessionStoreMongo({
+    mongooseConnection: db
+  })
+}));
+
+// Set the current user for templates
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
 
 // Set the port
 app.set('port', process.env.PORT || 3000);
