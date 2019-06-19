@@ -24,11 +24,13 @@ router.get('/landing', (req, res) => res.render('landing'));
 // App routes
 router.use('/signup', signupRoutes);
 
-
+// Hook in the Login routes
 router.use('/login', loginRoutes);
 
+// Hook in the book routes
 router.use('/booklist', bookRoutes);
 
+// display a user profile
 router.get('/profile/:userId', (req, res, next) => {
     return User.findById(req.params.userId, (err, user) => {
         if(err) return next(err);

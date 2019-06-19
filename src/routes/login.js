@@ -20,7 +20,9 @@ loginRouter.post('/', (req, res, next) => {
             } else {
                 // Return the user to the response.
                 req.session.userId = user._id;
-                return res.redirect(`profile/${user._id}`);
+
+                // Redirect the user to the Booklist page
+                return res.redirect('/booklist');
             }
         });
     // Return an error if no credentials are provided. 
