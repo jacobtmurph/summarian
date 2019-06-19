@@ -20,7 +20,7 @@ app.set('view engine', 'pug');
 app.use('/static', express.static('./src/assets'))
 
 // Set up a MongoDB connection
-mongoose.connect("mongodb://localhost:27017/summarian", {useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/summarian", {useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true});
 const db = mongoose.connection;
 
 // If database connection is successfull
