@@ -12,6 +12,9 @@
     "reviews",
     "mongo"
   ],
+  "engines": {
+    "node": "8.9.0"
+  }
   "author": "Jacob T. Murphy",
   "license": "ISC",
   "dependencies": {
