@@ -3,7 +3,8 @@ const apiRoutes = require('./api');
 const bookRoutes = require('./books')
 const express = require('express');
 const loginRoutes = require('./login');
-const signupRoutes= require('./signup')
+const searchRoutes = require('./search');
+const signupRoutes= require('./signup');
 const User = require('../models/user');
 
 
@@ -30,11 +31,14 @@ router.use('/login', loginRoutes);
 // Hook in the book routes
 router.use('/booklist', bookRoutes);
 
+// Hook in the search routes
+router.use('/search', searchRoutes);
+
 // display a user profile
 router.get('/profile/:userId', (req, res, next) => {
     return User.findById(req.params.userId, (err, user) => {
         if(err) return next(err);
-        res.render('profile', {user: user});
+        res.render('profile', {user: user, title: user.username});
     });
 });
 
