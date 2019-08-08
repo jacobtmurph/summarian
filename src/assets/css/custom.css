@@ -27,6 +27,10 @@ footer {
     padding: none;
 }
 
+.title-case {
+    text-transform: capitalize;
+}
+
 @media screen and (min-width: 1000px) {
     #content-wrapper {
         padding-bottom: 5.5rem;

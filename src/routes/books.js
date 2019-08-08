@@ -1,5 +1,6 @@
 // Load imports.
 const express = require('express');
+const titleCase = require('title-case');
 const Book = require('../models/book');
 const Summary = require('../models/summary');
 const ValidationError = require('mongoose').Error.ValidationError;
@@ -22,8 +23,8 @@ bookRouter.get('/', (req, res, next) => {
 bookRouter.post('/', (req, res, next) => {
     // Set the appropriate, required data from the request for the Book Schema.
     const bookData = {
-        title: req.body.title,
-        author: req.body.author,
+        title: req.body.title.toLowerCase(),
+        author: req.body.author.toLowerCase(),
         OpenLibraryId: req.body.OpenLibraryId ? req.body.OpenLibraryId : "",
     };
 
@@ -53,7 +54,7 @@ bookRouter.get('/:bookId', (req, res, next) => {
                             if(err) return next(err);
                             
                             // Render the book's page with the data from the database 
-                             res.render('book-info', { title: book.title, book: book});
+                             res.render('book-info', { title: titleCase(book.title), book: book});
                         });
 });
 

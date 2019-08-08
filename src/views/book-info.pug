@@ -7,8 +7,8 @@ block content
         if (book.OpenLibraryId)
             img(src=`http://covers.openlibrary.org/b/olid/${book.OpenLibraryId}-M.jpg`, alt=`${book.title} cover art`).img-thumbnail.d-block.mx-auto.mx-md-2
         .ml-md-2
-            h1.text-center.text-md-left= book.title
-            h3.text-center.text-md-left= book.author
+            h1.text-center.text-md-left.title-case= book.title
+            h3.text-center.text-md-left.title-case= book.author
     a(href="https://openlibrary.org/").text-muted.text-decoration-none.ml-5.ml-md-1 Book covers provided by the Open Library
 
     if(currentUser) 
