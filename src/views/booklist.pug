@@ -11,7 +11,7 @@ block content
                         if (book.OpenLibraryId)
                             img(src=`http://covers.openlibrary.org/b/olid/${book.OpenLibraryId}-M.jpg`, alt=`${book.title} cover art`).img-thumbnail.align-self-center
                         h2.title-case= book.title
-                    p.lead= book.author
+                    p.lead.title-case= book.author
                     if(book.summaries.length > 0)
                         p.text-muted Summaries: #{book.summaries.length}
         if (currentUser)
